@@ -79,7 +79,7 @@ const Home = () => {
     undeliveredForUser,
     email
   ) => {
-    const chatRef = ref(database, chats/${chatId});
+    const chatRef = ref(database, `chats/${chatId}`);
     const currentChatData = (await get(chatRef)).val();
     const type = "undeliveredMessagesBy" + undeliveredForUser;
     const undeliveredMessages = currentChatData[type] || [];
@@ -98,7 +98,7 @@ const Home = () => {
   // handles the read receipt of messages for a user
   const deleteUnReadMessages = async (chatId, unReadForUser, email) => {
     console.log(chatId, unReadForUser, email);
-    const chatRef = ref(database, chats/${chatId});
+    const chatRef = ref(database, `chats/${chatId}`);
     const currentChatData = (await get(chatRef)).val();
     const type = "unReadMessagesFor" + unReadForUser;
     const unReadMessages = currentChatData[type] || [];
@@ -140,10 +140,10 @@ const Home = () => {
     const sender = auth.currentUser;
     let chatId = "";
 
-    if (sender.email < receiver.email) chatId = ${sender.uid}-${receiver.uid};
-    else chatId = ${receiver.uid}-${sender.uid};
+    if (sender.email < receiver.email) chatId = `${sender.uid}-${receiver.uid}`;
+    else chatId = `${receiver.uid}-${sender.uid}`;
 
-    const chatRef = ref(database, chats/${chatId});
+    const chatRef = ref(database, `chats/${chatId}`);
     const chatSnapshot = await get(chatRef);
 
     if (chatSnapshot.exists()) {
@@ -248,15 +248,15 @@ const Home = () => {
   };
 
   // gets the chat messages from firebase 
-  // called after clickUserAndOpenChatBox
+  // called after `clickUserAndOpenChatBox`
   const getChatMessages = async (receiver) => {
     const sender = auth.currentUser;
 
     let chatId = "";
-    if (sender.email < receiver.email) chatId = ${sender.uid}-${receiver.uid};
-    else chatId = ${receiver.uid}-${sender.uid};
+    if (sender.email < receiver.email) chatId = `${sender.uid}-${receiver.uid}`;
+    else chatId = `${receiver.uid}-${sender.uid}`;
 
-    const chatRef = ref(database, chats/${chatId});
+    const chatRef = ref(database, `chats/${chatId}`);
     const chatSnapshot = await get(chatRef);
 
     if (chatSnapshot.exists()) {
