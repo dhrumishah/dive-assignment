@@ -247,7 +247,7 @@ const Home = () => {
     setMessageInputText("");
   };
 
-  // gets the chat messages from firebase 
+  // gets the chat messages from firebase
   // called after `clickUserAndOpenChatBox`
   const getChatMessages = async (receiver) => {
     const sender = auth.currentUser;
@@ -367,10 +367,10 @@ const Home = () => {
                                     &#10003;
                                   </i>
                                 )}
-                                {(chatMessage.sender ===
+                                {chatMessage.sender ===
                                   auth.currentUser.email &&
-                                  chatMessage.status === "delivered") ||
-                                  (chatMessage.status === "read" && (
+                                  (chatMessage.status === "delivered" ||
+                                    chatMessage.status === "read") && (
                                     <i
                                       className={`w-4 h-4 visible -mt-2.5 ${
                                         chatMessage.status === "read"
@@ -380,7 +380,7 @@ const Home = () => {
                                     >
                                       &#10003;
                                     </i>
-                                  ))}
+                                  )}
                               </div>
                             </div>
                           </div>
